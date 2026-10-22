@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="1000" height="680">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712" />
+      <stop offset="100%" stop-color="#070e24" />
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b132b" />
+      <stop offset="100%" stop-color="#070e24" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="680" fill="url(#bgGrad)" />
+
+  <text x="500" y="45" fill="#f9fafb" font-family="-apple-system, sans-serif" font-weight="900" font-size="22" text-anchor="middle">Layer 2 First-Hop Attack Mechanics: ARP Cache Poisoning (RFC 826 MitM)</text>
+  <text x="500" y="70" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="13" text-anchor="middle">How Unauthenticated ARP Replies Allow Gateway Hijacking &amp; How DAI Defeats Them</text>
+
+  <!-- Attacker Box (Left) -->
+  <rect x="50" y="110" width="240" height="155" rx="8" fill="url(#nodeGrad)" stroke="#ef4444" stroke-width="2" />
+  <rect x="65" y="125" width="210" height="24" rx="4" fill="rgba(239, 68, 68, 0.2)" />
+  <text x="170" y="141" fill="#f87171" font-family="sans-serif" font-weight="bold" font-size="12" text-anchor="middle">Attacker (Rogue Workstation)</text>
+  <text x="65" y="170" fill="#cbd5e1" font-family="monospace" font-size="11">• Real IP: 192.168.1.50</text>
+  <text x="65" y="190" fill="#fbbf24" font-family="monospace" font-size="11">• Attacker MAC: 00:1a:2b:3c:4d:5e</text>
+  <text x="65" y="210" fill="#f87171" font-family="monospace" font-size="11">• Injected Claim: 192.168.1.1 is at</text>
+  <text x="65" y="228" fill="#f87171" font-family="monospace" font-size="11">  00:1a:2b:3c:4d:5e (Rogue!)</text>
+
+  <!-- Switch (Center) -->
+  <rect x="370" y="110" width="260" height="155" rx="8" fill="url(#nodeGrad)" stroke="#06b6d4" stroke-width="2" />
+  <rect x="385" y="125" width="230" height="24" rx="4" fill="rgba(6, 182, 212, 0.2)" />
+  <text x="500" y="141" fill="#22d3ee" font-family="sans-serif" font-weight="bold" font-size="12" text-anchor="middle">Catalyst Switch (Access Layer)</text>
+  <text x="385" y="170" fill="#cbd5e1" font-family="monospace" font-size="11">• DAI Status: ACTIVE</text>
+  <text x="385" y="190" fill="#38bdf8" font-family="monospace" font-size="11">• DHCP Snooping DB: SYNCED</text>
+  <text x="385" y="210" fill="#34d399" font-family="monospace" font-size="11">• Validation: src-mac, dst-mac, ip</text>
+  <text x="385" y="230" fill="#fbbf24" font-family="monospace" font-size="11">• Rate-Limit: 15 pps / Err-disable</text>
+
+  <!-- Victim Workstation (Right) -->
+  <rect x="710" y="110" width="240" height="155" rx="8" fill="url(#nodeGrad)" stroke="#38bdf8" stroke-width="2" />
+  <rect x="725" y="125" width="210" height="24" rx="4" fill="rgba(56, 189, 248, 0.2)" />
+  <text x="830" y="141" fill="#38bdf8" font-family="sans-serif" font-weight="bold" font-size="12" text-anchor="middle">Victim Workstation</text>
+  <text x="725" y="170" fill="#cbd5e1" font-family="monospace" font-size="11">• IP: 192.168.1.100</text>
+  <text x="725" y="190" fill="#cbd5e1" font-family="monospace" font-size="11">• MAC: 00:11:22:33:44:55</text>
+  <text x="725" y="215" fill="#34d399" font-family="sans-serif" font-size="10">Target of Unsolicited Poison</text>
+  <text x="725" y="235" fill="#34d399" font-family="sans-serif" font-size="10">Protected by Switch DAI</text>
+
+  <!-- Connectors -->
+  <!-- Attacker to Switch -->
+  <line x1="290" y1="185" x2="370" y2="185" stroke="#ef4444" stroke-width="3" />
+  <text x="330" y="175" fill="#f87171" font-family="monospace" font-size="10" text-anchor="middle">Spoofed ARP</text>
+
+  <!-- Switch to Victim -->
+  <line x1="630" y1="185" x2="710" y2="185" stroke="#10b981" stroke-width="3" stroke-dasharray="5" />
+  <text x="670" y="175" fill="#34d399" font-family="monospace" font-size="10" text-anchor="middle">BLOCKED!</text>
+
+  <!-- Default Gateway (Bottom Center) -->
+  <rect x="370" y="310" width="260" height="120" rx="8" fill="url(#nodeGrad)" stroke="#10b981" stroke-width="2" />
+  <rect x="385" y="325" width="230" height="24" rx="4" fill="rgba(16, 185, 129, 0.2)" />
+  <text x="500" y="341" fill="#34d399" font-family="sans-serif" font-weight="bold" font-size="12" text-anchor="middle">Authentic Default Gateway</text>
+  <text x="385" y="370" fill="#cbd5e1" font-family="monospace" font-size="11">• Gateway IP: 192.168.1.1</text>
+  <text x="385" y="390" fill="#34d399" font-family="monospace" font-size="11">• Authentic MAC: 00:50:56:a1:b2:c3</text>
+  <text x="385" y="415" fill="#cbd5e1" font-family="sans-serif" font-size="10">Connected to Trusted Trunk Port</text>
+
+  <line x1="500" y1="265" x2="500" y2="310" stroke="#10b981" stroke-width="3" />
+  <text x="545" y="290" fill="#34d399" font-family="monospace" font-size="10">Trunk Trust</text>
+
+  <!-- Hardened Defense Box (Bottom Left) -->
+  <rect x="50" y="470" width="900" height="175" rx="8" fill="url(#nodeGrad)" stroke="#10b981" stroke-width="2" />
+  <rect x="65" y="485" width="870" height="26" rx="4" fill="rgba(16, 185, 129, 0.2)" />
+  <text x="500" y="502" fill="#34d399" font-family="sans-serif" font-weight="bold" font-size="13" text-anchor="middle">Zero-Trust Layer 2 First-Hop Security Defense (Synthesized by ARPForge Pro)</text>
+  <text x="80" y="535" fill="#34d399" font-family="monospace" font-size="11">1. Authoritative Binding Database:</text>
+  <text x="360" y="535" fill="#cbd5e1" font-family="sans-serif" font-size="11">DAI intercepts ARP and queries DHCP Snooping table. Rogue IP/MAC claims dropped.</text>
+
+  <text x="80" y="565" fill="#34d399" font-family="monospace" font-size="11">2. Strict Header Validation:</text>
+  <text x="360" y="565" fill="#cbd5e1" font-family="sans-serif" font-size="11">Enforce "validate src-mac dst-mac ip". Discards mismatches and illegal 0.0.0.0 IPs.</text>
+
+  <text x="80" y="595" fill="#34d399" font-family="monospace" font-size="11">3. CPU Rate-Limiting &amp; Auto-Recovery:</text>
+  <text x="360" y="595" fill="#cbd5e1" font-family="sans-serif" font-size="11">Cap untrusted ports at 15 pps; automatically recover err-disabled ports after 30 seconds.</text>
+
+  <text x="80" y="625" fill="#34d399" font-family="monospace" font-size="11">4. Static ARP ACL Mapping:</text>
+  <text x="360" y="625" fill="#cbd5e1" font-family="sans-serif" font-size="11">Explicit "ip arp inspection filter STATIC static" prevents blackholing servers &amp; printers.</text>
+</svg>
